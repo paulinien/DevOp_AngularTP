@@ -1,0 +1,14 @@
+.animal {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.infosAnimal {
+  box-shadow: 3px 3px 12px #adadad;
+  border-radius: 8px;
+  min-width: 50vw;
+  padding: 1em;
+}
