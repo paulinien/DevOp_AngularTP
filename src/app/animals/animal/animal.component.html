@@ -5,7 +5,12 @@
     Espèce : {{ animal?.species }}<br/>
     Vétérinaire : {{ animal?.veterinarian }}<br/>
     Commentaire : {{ animal?.comment }}<br/>
-    Email : <a [href]="animal?.email">{{animal?.email}}</a><br/>
-    Numéro de téléphone : {{ animal?.phoneNumber }}<br/>
+<!--    Email : <a href="{{'mailto:' + animal?.email}}">{{animal?.email}}</a><br/>-->
+    Email : <a [mailToDirective]=animal!.email>{{animal?.email}}</a><br/>
+<!--    Numéro de téléphone : <a href="{{'tel:' + animal?.phoneNumber}}"> {{ animal!.phoneNumber | phoneNumberFormat }} </a><br/>-->
+    Numéro de téléphone : <a [telDirective]="animal!.phoneNumber"> {{ animal!.phoneNumber | phoneNumberFormat }} </a><br/>
   </p>
+  <div class="divDeleteButton">
+    <button class="deleteButton" mat-raised-button color="primary" (click)="deleteAnimal()">Supprimer</button>
+  </div>
 </div>

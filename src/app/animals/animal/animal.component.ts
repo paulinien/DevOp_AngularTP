@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform} from '@angular/core';
 
 export interface Animal {
   readonly id: number,
@@ -23,6 +23,12 @@ export class AnimalComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  @Output() deleteEvent = new EventEmitter<Animal>();
+
+  deleteAnimal() {
+    this.deleteEvent.emit(this.animal!)
   }
 
 }

@@ -75,7 +75,8 @@
               "browserTarget": "AngularTP1:build:production"
             },
             "development": {
-              "browserTarget": "AngularTP1:build:development"
+              "browserTarget": "AngularTP1:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

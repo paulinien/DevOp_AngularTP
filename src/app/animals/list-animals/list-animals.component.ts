@@ -9,13 +9,18 @@ import {Animal} from "../animal/animal.component";
 })
 export class ListAnimalsComponent implements OnInit {
 
-  public animals: Animal[] = []
-
   constructor(private animalService: AnimalService) {
   }
 
   ngOnInit(): void {
-    this.animals = this.animalService.animals
+  }
+
+  get animals(): Animal[]{
+    return this.animalService.animals
+  }
+
+  deleteAnimal(animal: Animal) {
+    this.animalService.deleteAnimal(animal)
   }
 
 }

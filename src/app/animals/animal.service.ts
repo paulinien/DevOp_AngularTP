@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Animal} from "./animal/animal.component";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -7,57 +8,19 @@ import {Animal} from "./animal/animal.component";
 
 export class AnimalService {
 
-  private _animals = {
-    "animals": [
-      {
-        "id": 1,
-        "name": "Idéfix",
-        "species": "dog",
-        "veterinarian": "Panoramix D'Armorique",
-        "comment": "Développe une allergie à la potion magique.",
-        "email": "test1@gmail.com",
-        "phoneNumber": "06.12.34.56.78"
-      },
-      {
-        "id": 2,
-        "name": "Chatbus",
-        "species": "cat",
-        "veterinarian": "Ged Épervier",
-        "comment": "Faire prendre rdv 1 mois au moins en avance afin de pouvoir réserver le hangar du mécaniste voisin.",
-        "email": "test2@gmail.com",
-        "phoneNumber": "06.12.34.56.79"
-      },
-      {
-        "id": 3,
-        "name": "Teto",
-        "species": "fox-squirrel",
-        "veterinarian": "Ged Épervier",
-        "comment": "Très agité.",
-        "email": "test3@gmail.com",
-        "phoneNumber": "06.12.34.56.80"
-      }
-    ],
-    "veterinarians": [
-      {
-        "id": 1,
-        "firstName": "Panoramix",
-        "lastName": "D'Armorique"
-      },
-      {
-        "id": 2,
-        "firstName": "Ged",
-        "lastName": "Épervier"
-      }
-    ]
-  }
+  private _animals: Animal[] = []
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) {
+    httpClient.get<Animal[]>('/api/animals').subscribe((animals) => this._animals=animals)
+  }
 
   public get animals(): Animal[] {
-    return this._animals.animals
+    return this._animals
   }
 
-  public count(): number {
-    return this._animals.animals.length
+  deleteAnimal(animal: Animal) {
+    // this._animals = this._animals.filter(a => a.id!=animal.id)
+    this.httpClient.delete(`/api/animals/${animal.id}`).subscribe()
+    this.httpClient.get<Animal[]>('/api/animals').subscribe((animals) => this._animals=animals)
   }
 }
